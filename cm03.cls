@@ -19,13 +19,20 @@
   ItalicFont = *-italic,
   BoldItalicFont = *-bolditalic
   ]
+
 \IfFontExistsTF{Kaiti TC}{%
   \setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]%
 }{%
-  \setCJKmainfont{BiauKai}[AutoFakeBold=3]%
+  \IfFontExistsTF{BiauKai}{%
+    \setCJKmainfont{BiauKai}[AutoFakeBold=3]%
+  }{%
+    \setCJKmainfont{AR PL UKai TW}[AutoFakeBold=3]
+  }
 }
-\setmonofont{PragmataPro Mono}[Scale=0.81]
-\setCJKmonofont{PragmataPro Mono}[Scale=0.81]
+\IfFontExistsTF{PragmataPro Mono}{%
+  \setmonofont{PragmataPro Mono}[Scale=0.81]
+  \setCJKmonofont{PragmataPro Mono}[Scale=0.81]
+}{}
 \setmathfont{texgyretermes-math.otf}
 
 \RequirePackage{setspace}
