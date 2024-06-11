@@ -27,18 +27,22 @@
 
 \ifx\useLibertine\relax
 \RequirePackage{fontspec}
-\setmainfont{Linux Libertine O}
-\setsansfont{Linux Biolinum O}
+\usepackage{libertineRoman}
+\usepackage{biolinum}
 \fi
 
 \RequirePackage[PunctStyle=plain]{xeCJK}
-\ifwindows
-\setCJKmainfont{標楷體}
-\else\ifmacosx
-\setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]
-\else
-\setCJKmainfont{AR PL UKai TW}[AutoFakeBold=3]
-\fi
+\IfFontExistsTF{BiauKai}{%
+  \setCJKmainfont{BiauKai}[AutoFakeBold=3]
+}{%
+  \IfFontExistsTF{Kaiti TC}{%
+    \setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]
+  }{%
+    \IfFontExistsTF{AR PL UKai TW}{%
+      \setCJKmainfont{AR PL UKai TW}[AutoFakeBold=3]
+    }{}
+  }
+}
 
 \renewcommand{\CJKttdefault}{rm}
 
@@ -47,8 +51,7 @@
 
 \RequirePackage{zhnumber}
 \RequirePackage{titlesec}
-\titleformat{\section}[runin]{\bfseries\normalsize}{（\zhnum{section}）}{0em}{}
-\titlespacing{\section}{0em}{3ex}{0ex}
+\titleformat{\section}[runin]{\bfseries\normalsize}{（\zhnum{section}）}{1em}{}
 \titleformat{\subsection}[runin]{\bfseries\normalsize}{\thesubsection}{0.5em}{}
 \titleformat{\subsubsection}[runin]{\bfseries\normalsize}{\thesubsubsection}{0.5em}{}
 
@@ -70,8 +73,8 @@
 \RequirePackage[authoryear,square]{natbib}
 \RequirePackage{url}
 \RequirePackage{doi}
-\newcommand{\isbn}[1]{{\small ISBN}:~\href{http://www.isbnsearch.org/isbn/#1}{\nolinkurl{#1}}}
-\newcommand{\urlentry}[1]{\textsc{Url}:~\url{#1}}
+\newcommand{\isbn}[1]{{\scshape Isbn}:~\href{http://www.isbnsearch.org/isbn/#1}{\nolinkurl{#1}}}
+\newcommand{\urlentry}[1]{{\scshape Url}:~\url{#1}}
 \newcommand{\arXiv}[1]{\href{http://arxiv.org/abs/#1}{arXiv:\nolinkurl{#1}}}
 
 \RequirePackage{amsmath,amsthm}
