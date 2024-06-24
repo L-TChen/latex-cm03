@@ -21,17 +21,28 @@
 \ProcessOptions\relax
 
 \LoadClass[a4paper,12pt,onecolumn]{article}
+
 \RequirePackage[hidelinks,pdfusetitle]{hyperref}
 \RequirePackage[margin=2cm,bottom=2.4cm]{geometry}
-\RequirePackage{ifplatform}
 
-\ifx\useLibertine\relax
 \RequirePackage{fontspec}
-\usepackage{libertineRoman}
-\usepackage{biolinum}
+\RequirePackage{unicode-math}
+\ifx\useLibertine\relax
+  \RequirePackage{libertineRoman}
+  \RequirePackage{biolinum}
+  \setmathfont[Scale=MatchUppercase]{LibertinusMath-Regular.otf}
+\else
+  \setmainfont{texgyretermes.otf}[
+    UprightFont = *-regular,
+    BoldFont = *-bold,
+    ItalicFont = *-italic,
+    BoldItalicFont = *-bolditalic
+    ]
+  \setmathfont{texgyretermes-math.otf}
 \fi
 
 \RequirePackage[PunctStyle=plain]{xeCJK}
+%\RequirePackage{luatexja-fontspec}
 \IfFontExistsTF{BiauKai}{%
   \setCJKmainfont{BiauKai}[AutoFakeBold=3]
 }{%
@@ -44,14 +55,13 @@
   }
 }
 
-\renewcommand{\CJKttdefault}{rm}
 
 \RequirePackage{setspace}
 \onehalfspacing
 
 \RequirePackage{zhnumber}
 \RequirePackage{titlesec}
-\titleformat{\section}[runin]{\bfseries\normalsize}{（\zhnum{section}）}{1em}{}
+\titleformat{\section}[runin]{\bfseries\normalsize}{（\zhnum{section}）}{0em}{}
 \titleformat{\subsection}[runin]{\bfseries\normalsize}{\thesubsection}{0.5em}{}
 \titleformat{\subsubsection}[runin]{\bfseries\normalsize}{\thesubsubsection}{0.5em}{}
 
