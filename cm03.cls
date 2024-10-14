@@ -50,7 +50,11 @@
 \IfFontExistsTF{BiauKai}{
   \setCJKmainfont{BiauKai}[AutoFakeBold=2.5]
 }{
+\IfFontExistsTF{AR PL UKai TW}{
+  \setCJKmainfont{AR PL UKai TW}[AutoFakeBold=2.5]
+  }{
   \setCJKmainfont{TW-MOE-Std-Kai}[AutoFakeBold=2.5]
+  }
 }
 \fi
 
