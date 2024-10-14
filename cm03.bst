@@ -1544,6 +1544,12 @@ FUNCTION {begin.bib}
   write$ newline$
   "  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup \urlstyle{rm}\Url}\fi"
   write$ newline$
+  "\providecommand{\isbn}[1]{{\scshape Isbn}:~\href{http://www.isbnsearch.org/isbn/#1}{\nolinkurl{#1}}}"
+  write$ newline$
+  "\providecommand{\urlentry}[1]{{\scshape Url}:~\url{#1}}"
+  write$ newline$
+  "\providecommand{\arXiv}[1]{\href{http://arxiv.org/abs/#1}{arXiv:\nolinkurl{#1}}}"
+  write$ newline$
 }
 EXECUTE {begin.bib}
 EXECUTE {init.state.consts}

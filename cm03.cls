@@ -16,20 +16,22 @@
 \DeclareOption{twocolumn}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
 
 \DeclareOption{libertine}{\let\useLibertine\relax}
+\DeclareOption{kaiti}{\let\useKaiti\relax}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
 \LoadClass[a4paper,12pt,onecolumn]{article}
 
-\RequirePackage[hidelinks,pdfusetitle]{hyperref}
 \RequirePackage[margin=2cm,bottom=2.4cm]{geometry}
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{xifthen}
 
 \RequirePackage{fontspec}
 \RequirePackage{unicode-math}
+
 \ifx\useLibertine\relax
-  \RequirePackage{libertineRoman}
-  \RequirePackage{biolinum}
+  \RequirePackage[tt=false]{libertine}
   \setmathfont[Scale=MatchUppercase]{LibertinusMath-Regular.otf}
 \else
   \setmainfont{texgyretermes.otf}[
@@ -42,34 +44,29 @@
 \fi
 
 \RequirePackage[PunctStyle=plain]{xeCJK}
-%\RequirePackage{luatexja-fontspec}
-\IfFontExistsTF{BiauKai}{%
-  \setCJKmainfont{BiauKai}[AutoFakeBold=3]
-}{%
-  \IfFontExistsTF{Kaiti TC}{%
-    \setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]
-  }{%
-    \IfFontExistsTF{AR PL UKai TW}{%
-      \setCJKmainfont{AR PL UKai TW}[AutoFakeBold=3]
-    }{}
-  }
+\ifx\useKaiti\relax
+  \setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]
+\else
+\IfFontExistsTF{BiauKai}{
+  \setCJKmainfont{BiauKai}[AutoFakeBold=2.5]
+}{
+  \setCJKmainfont{TW-MOE-Std-Kai}[AutoFakeBold=2.5]
 }
+\fi
 
 
 \RequirePackage{setspace}
 \onehalfspacing
 
-\RequirePackage{zhnumber}
-\RequirePackage{titlesec}
+\RequirePackage{zhnumber,titlesec}
+
 \titleformat{\section}[runin]{\bfseries\normalsize}{（\zhnum{section}）}{0em}{}
 \titleformat{\subsection}[runin]{\bfseries\normalsize}{\thesubsection}{0.5em}{}
 \titleformat{\subsubsection}[runin]{\bfseries\normalsize}{\thesubsubsection}{0.5em}{}
 
 \AddToHook{begindocument/end}{\par\noindent\begingroup\large\bfseries 三、研究計畫內容（以中文或英文撰寫）：\endgroup\par}
 
-\RequirePackage{lastpage}
-\RequirePackage{fancyhdr}
-\RequirePackage{fancyvrb}
+\RequirePackage{lastpage,fancyhdr,fancyvrb}
 
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
@@ -78,25 +75,8 @@
 \cfoot{}
 \rfoot{共~\pageref{LastPage}~頁\hspace{1em}第~\thepage~頁}
 
-\renewcommand{\refname}{\bfseries 參考文獻}
+\RequirePackage[authoryear,square,sort]{natbib}
+\renewcommand{\bibsection}{\section*{參考文獻}}
 
-\RequirePackage[authoryear,square]{natbib}
-\RequirePackage{url}
+\RequirePackage[hidelinks,pdfusetitle]{hyperref}
 \RequirePackage{doi}
-\newcommand{\isbn}[1]{{\scshape Isbn}:~\href{http://www.isbnsearch.org/isbn/#1}{\nolinkurl{#1}}}
-\newcommand{\urlentry}[1]{{\scshape Url}:~\url{#1}}
-\newcommand{\arXiv}[1]{\href{http://arxiv.org/abs/#1}{arXiv:\nolinkurl{#1}}}
-
-\RequirePackage{amsmath,amsthm}
-
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-
-\RequirePackage{cleveref}
-\RequirePackage[dvipsnames]{xcolor}
