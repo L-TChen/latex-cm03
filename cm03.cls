@@ -15,8 +15,8 @@
 \DeclareOption{notitlepage}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
 \DeclareOption{twocolumn}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
 
-\DeclareOption{libertine}{\let\useLibertine\relax}
-\DeclareOption{kaiti}{\let\useKaiti\relax}
+\DeclareOption{libertine}{\let\@libertine\relax}
+\DeclareOption{kaiti}{\let\@kaiti\relax}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -29,7 +29,7 @@
 \RequirePackage{fontspec}
 \RequirePackage{unicode-math}
 
-\ifx\useLibertine\relax
+\ifx\@libertine\relax
   \RequirePackage[tt=false]{libertine}
   \setmathfont[Scale=MatchUppercase]{LibertinusMath-Regular.otf}
 \else
@@ -47,7 +47,7 @@
 
 \RequirePackage[PunctStyle=plain]{xeCJK}
 
-\ifx\useKaiti\relax
+\ifx\@kaiti\relax
   \setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]
   \@latex@warning{使用楷體作為中文字型}
 \else
