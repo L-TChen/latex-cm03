@@ -24,8 +24,7 @@
 \LoadClass[a4paper,12pt,onecolumn,twoside]{article}
 
 \RequirePackage[margin=2cm,bottom=2.4cm]{geometry}
-\RequirePackage[dvipsnames]{xcolor}
-\RequirePackage{xifthen,ifplatform}
+\RequirePackage{ifplatform}
 
 \RequirePackage{fontspec}
 \RequirePackage{unicode-math}
