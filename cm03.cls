@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{cm03}[2024/06/10 NSTC LaTeX class]
+\ProvidesClass{cm03}[2024/10/14 NSTC LaTeX class]
 
 \def\cmthree@opterrshort{Option  "\CurrentOption" not supported}
 \def\cmthree@opterrlong{The option "\CurrentOption" from article.cls is not supported by cmthree.cls.}
@@ -21,11 +21,11 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
-\LoadClass[a4paper,12pt,onecolumn]{article}
+\LoadClass[a4paper,12pt,onecolumn,twoside]{article}
 
 \RequirePackage[margin=2cm,bottom=2.4cm]{geometry}
 \RequirePackage[dvipsnames]{xcolor}
-\RequirePackage{xifthen}
+\RequirePackage{xifthen,ifplatform}
 
 \RequirePackage{fontspec}
 \RequirePackage{unicode-math}
@@ -43,21 +43,42 @@
   \setmathfont{texgyretermes-math.otf}
 \fi
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up KaiTi as the default Chinese font for cm03
+
 \RequirePackage[PunctStyle=plain]{xeCJK}
+
 \ifx\useKaiti\relax
   \setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]
+  \@latex@warning{使用楷體作為中文字型}
 \else
-\IfFontExistsTF{BiauKai}{
-  \setCJKmainfont{BiauKai}[AutoFakeBold=2.5]
-}{
-\IfFontExistsTF{AR PL UKai TW}{
-  \setCJKmainfont{AR PL UKai TW}[AutoFakeBold=2.5]
-  }{
-  \setCJKmainfont{TW-MOE-Std-Kai}[AutoFakeBold=2.5]
-  }
-}
-\fi
 
+\ifwindows
+  \setCJKmainfont{BiauKai}[AutoFakeBold=2.5]
+  \@latex@warning{使用標楷體作為中文字型}
+\else
+
+\IfFontExistsTF{BiauKai}{
+  % BiauKai is shipped on macOS 13.2
+  \setCJKmainfont{BiauKai}[AutoFakeBold=2.5]
+  \@latex@warning{使用標楷體 (BiauKai) 作為中文字型}
+}{
+  \IfFontExistsTF{BiauKaiTC}{
+  % After macOS 13.3, BiauKai is renamed to BiauKaiTC
+    \setCJKmainfont{BiauKaiTC}[AutoFakeBold=2.5]
+    \@latex@warning{使用標楷體繁 (BiauKaiTC) 作為中文字型}
+}{
+  \IfFontExistsTF{AR PL UKai TW}{
+  % AR PL UKai TW is shipped with Ubuntu
+  \setCJKmainfont{AR PL UKai TW}[AutoFakeBold=2.5]
+    \@latex@warning{使用 AR PL UKai TW 作為中文字型}
+}{
+  \@latex@warning{使用教育部標準楷書作為中文字型}
+  % Try to use 教育部標準楷書
+  \setCJKmainfont{TW-MOE-Std-Kai}[AutoFakeBold=2.5]
+}}}
+
+\fi\fi
 
 \RequirePackage{setspace}
 \onehalfspacing
