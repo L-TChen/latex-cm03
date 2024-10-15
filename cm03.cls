@@ -1,3 +1,6 @@
+% Author: Josh Ko and Liang-Ting Chen
+% Maintainer: Liang-Ting Chen (ltchen@iis.sinica.edu.tw)
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{cm03}[2024/10/14 NSTC LaTeX class]
 
