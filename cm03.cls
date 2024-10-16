@@ -4,19 +4,20 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{cm03}[2024/10/14 NSTC LaTeX class]
 
-\def\cmthree@opterrshort{Option  "\CurrentOption" not supported}
-\def\cmthree@opterrlong{The option "\CurrentOption" from article.cls is not supported by cmthree.cls.}
+\def\cmthree@opterrlong{The option "\CurrentOption" from article.cls is not compatible with the format of cm03.}
+\newcommand{\cmthree@warning}{\ClassWarning{cm03}{\cmthree@opterrlong}}
+\newcommand{\cmthree@info}[1]{\ClassInfo{cm03}{#1}}
 
-\DeclareOption{a5paper}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{b5paper}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{legalpaper}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{executivepaper}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{landscape}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{10pt}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{11pt}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{titlepage}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{notitlepage}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
-\DeclareOption{twocolumn}{\@latexerr{\cmthree@opterrshort}{\cmthree@opterrlong}}
+\DeclareOption{a5paper}{\cmthree@warning}
+\DeclareOption{b5paper}{\cmthree@warning}
+\DeclareOption{legalpaper}{\cmthree@warning}
+\DeclareOption{executivepaper}{\cmthree@warning}
+\DeclareOption{landscape}{\cmthree@warning}
+\DeclareOption{10pt}{\cmthree@warning}
+\DeclareOption{11pt}{\cmthree@warning}
+\DeclareOption{titlepage}{\cmthree@warning}
+\DeclareOption{notitlepage}{\cmthree@warning}
+\DeclareOption{twocolumn}{\cmthree@warning}
 
 \DeclareOption{libertine}{\let\@libertine\relax}
 \DeclareOption{kaiti}{\let\@kaiti\relax}
@@ -58,26 +59,29 @@
 %% AR PL UKai TW is shipped with TeX
 
 \iftutex
+
 \RequirePackage[PunctStyle=plain]{xeCJK}
 \ifx\@kaiti\relax
   \setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]
-  \@latex@warning{使用楷體作為中文字型}
+  \setCJKsansfont{Heiti TC}
+  \cmthree@info{使用楷體作為中文字型}
 \else
 \IfFontExistsTF{BiauKai}{
   % BiauKai is available on macOS and Windows
   \setCJKmainfont{BiauKai}[AutoFakeBold=2.5]
-  \@latex@warning{使用標楷體 (BiauKai) 作為中文字型}
+  \cmthree@info{使用標楷體 (BiauKai) 作為中文字型}
 }{
   \IfFontExistsTF{BiauKaiTC}{
   % BiauKai is renamed to BiauKaiTC on macOS 13.3 and above
   \setCJKmainfont{BiauKaiTC}[AutoFakeBold=2.5]
-  \@latex@warning{使用標楷體繁 (BiauKaiTC) 作為中文字型}
+  \cmthree@info{使用標楷體繁 (BiauKaiTC) 作為中文字型}
 }{
   % AR PL UKai is shipped with TeX
   \setCJKmainfont{bkai00mp.ttf}[AutoFakeBold=2.5]
-  \@latex@warning{使用 AR PL UKai TW 作為中文字型}
+  \cmthree@info{使用 AR PL UKai TW 作為中文字型}
 }}
 \fi
+
 \else
   \RequirePackage{CJKutf8}
   \newenvironment{kai}{\begin{CJK*}{UTF8}{bkai}}{\end{CJK*}}
@@ -124,8 +128,9 @@
 \RequirePackage[hidelinks,pdfusetitle]{hyperref}
 \RequirePackage{doi}
 
-\iftutex
-\else
+\iftutex\else
+%% Redefine \section: sections in cm03 are in Chinese, so 
+%% they are placed in the CJK environment.
   \let\@section\section
   \newcommand{\@zhsectionstar}[1]{\begin{kai}\@section*{#1}\end{kai}}
   \newcommand{\@zhsection}[2]{\begin{kai}\@section{#1}#2\end{kai}}
