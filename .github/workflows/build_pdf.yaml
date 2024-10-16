@@ -12,9 +12,6 @@ jobs:
         with:
           root_file: |
             proposal*.tex
-          latexmk_use_xelatex: true
-          extra_fonts: |
-            ./font/edukai-5.0.ttf
 
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
