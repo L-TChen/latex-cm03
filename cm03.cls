@@ -46,7 +46,7 @@
   \RequirePackage{newtxtext}
   \iftutex
 % newtxtexr changes fontspec settings,
-5 so we revert them to set up the CJK font
+% so we revert them to set up the CJK font
     \defaultfontfeatures{} 
   \fi
   \RequirePackage[amsthm]{newtxmath}
