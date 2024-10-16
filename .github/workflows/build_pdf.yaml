@@ -13,9 +13,15 @@ jobs:
           root_file: |
             proposal*.tex
 
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          latexmk_use_xelatex: true
+          root_file: |
+            xetex-proposal*.tex
+
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
-          name: PDF
           path: |
-            proposal*.pdf
+            *.pdf
