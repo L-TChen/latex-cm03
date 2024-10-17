@@ -29,7 +29,8 @@
 
 \RequirePackage[margin=2cm,bottom=2.4cm]{geometry}
 
-\RequirePackage{iftex}
+\RequirePackage{iftex,xifthen}
+\RequirePackage{amsmath,amsthm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set up the English font for cm03
@@ -122,12 +123,6 @@
   \rfoot{\begin{kai}共~\pageref{LastPage}~頁\hspace{1em}第~\thepage~頁\end{kai}}
 \fi
 
-\RequirePackage[authoryear,square,sort]{natbib}
-\renewcommand{\bibsection}{\section*{參考文獻}}
-
-\RequirePackage[hidelinks,pdfusetitle]{hyperref}
-\RequirePackage{doi}
-
 \iftutex\else
 %% Redefine \section: sections in cm03 are in Chinese, so 
 %% they are placed in the CJK environment.
@@ -136,3 +131,28 @@
   \newcommand{\@zhsection}[2]{\begin{kai}\@section{#1}#2\end{kai}}
   \renewcommand{\section}{\@ifstar{\@zhsectionstar}{\@zhsection}}
 \fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up natbib with the section title for bibliography in Chinese
+
+\RequirePackage[authoryear,square,sort]{natbib}
+\renewcommand{\bibsection}{\section*{參考文獻}}
+\newcommand{\varcitet}[3][]{\citeauthor{#2}#3~\ifthenelse{\isempty{#1}}{\citeyearpar{#2}}{\citeyearpar[#1]{#2}}}
+
+\RequirePackage[hidelinks,pdfusetitle]{hyperref}
+\RequirePackage{doi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up the inilne enumerate environment
+\usepackage[inline]{enumitem}

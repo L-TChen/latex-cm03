@@ -10,18 +10,22 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
+          working_directory: sample
           root_file: |
-            proposal*.tex
+            proposal.tex
+            proposal-libertine.tex
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           latexmk_use_xelatex: true
+          working_directory: sample
           root_file: |
-            xetex-proposal*.tex
+            proposal-xetex.tex
+            proposal-libertine-xetex.tex
 
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
           path: |
-            *.pdf
+            sample/*.pdf
