@@ -2,7 +2,7 @@
 % Maintainer: Liang-Ting Chen (ltchen@iis.sinica.edu.tw)
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{cm03}[2024/10/14 NSTC LaTeX class]
+\ProvidesClass{cm03}[2024/10/21 NSTC LaTeX class]
 
 \def\cmthree@opterrlong{The option "\CurrentOption" from article.cls is not compatible with the format of cm03.}
 \newcommand{\cmthree@warning}{\ClassWarning{cm03}{\cmthree@opterrlong}}
@@ -33,35 +33,13 @@
 \RequirePackage{amsmath,amsthm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Set up the English font for cm03
-%% The alternative `newtx` to New Times Roman is used. 
-
-\ifx\@libertine\relax
-  \RequirePackage[tt=false]{libertine}
-  \iftutex
-    \RequirePackage{unicode-math}
-    \setmathfont[Scale=MatchUppercase]{LibertinusMath-Regular.otf}
-  \else
-    \RequirePackage[libertine,amsthm]{newtxmath}
-  \fi
-\else
-  \RequirePackage{newtxtext}
-  \iftutex
-% newtxtexr changes fontspec settings,
-% so we revert them to set up the CJK font
-    \defaultfontfeatures{} 
-  \fi
-  \RequirePackage[amsthm]{newtxmath}
-\fi
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set up Kai Ti (楷體) as the default Chinese font for cm03
 %% BiauKai is available on Windows and macOS (with different font names)
 %% AR PL UKai TW is shipped with TeX
 
 \iftutex
 
-\RequirePackage[PunctStyle=plain]{xeCJK}
+\RequirePackage[PunctStyle=plain,no-math]{xeCJK}
 \ifx\@kaiti\relax
   \setCJKmainfont{Kaiti TC}[BoldFont = *-Bold]
   \setCJKsansfont{Heiti TC}
@@ -86,13 +64,45 @@
 \else
   \RequirePackage{CJKutf8}
   \newenvironment{kai}{\begin{CJK*}{UTF8}{bkai}}{\end{CJK*}}
-%% CJK's bkai font only supports the `bx` shape (extended boldface)
-%% we will use bx as the default boldface inside the CJK environment. 
-  \AddToHook{env/CJK*/begin}{\renewcommand{\bfdefault}{bx}}
+%% CJK's bkai font only provides the `bx` shape (boldface extended) by default.
+%% Therefore, we load its font definition `c70bkai.fd` explicitly and declare
+%% the boldface shape `b`. 
+  \input{c70bkai.fd}
+  \DeclareFontShape{C70}{bkai}{b}{n}{<-> CJKb * bkaiu}{\CJKbold}
 \fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up the English font for cm03
+%% The alternative `newtx` to New Times Roman is used. 
+
+\ifx\@libertine\relax
+  \RequirePackage[tt=false]{libertine}
+  \iftutex
+    \RequirePackage{unicode-math}
+    \setmathfont[Scale=MatchUppercase]{LibertinusMath-Regular.otf}
+  \else
+    \RequirePackage[libertine]{newtxmath}
+  \fi
+\else
+  \RequirePackage{newtxtext}
+  \iftutex
+% newtxtexr changes fontspec settings,
+% so we revert them to set up the CJK font
+    \defaultfontfeatures{} 
+  \fi
+  \RequirePackage{newtxmath}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up the line spacing to one and half line
+%% 
 
 \RequirePackage{setspace}
 \onehalfspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set up Chinese numbering and the format of section title
+%% 
 
 \RequirePackage{zhnumber,titlesec}
 
