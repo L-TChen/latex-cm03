@@ -113,7 +113,7 @@
 \iftutex
   \AddToHook{begindocument/end}{\par\noindent\begingroup\large\bfseries 三、研究計畫內容（以中文或英文撰寫）：\endgroup\par}
 \else
-  \AddToHook{begindocument/end}{\par\noindent\begingroup\large\begin{kai}\bfseries 三、研究計畫內容（以中文或英文撰寫）：\end{kai}\endgroup\par}
+  \AddToHook{begindocument/end}{\par\everypar={{\setbox0=\lastbox}\everypar{}}\begingroup\large\begin{kai}\bfseries 三、研究計畫內容（以中文或英文撰寫）：\end{kai}\endgroup\par}
 \fi
 
 \RequirePackage{lastpage,fancyhdr}
