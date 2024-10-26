@@ -31,6 +31,7 @@
 
 \RequirePackage{iftex,xifthen}
 \RequirePackage{amsmath,amsthm}
+\RequirePackage{babel}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set up Kai Ti (楷體) as the default Chinese font for cm03
