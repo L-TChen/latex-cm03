@@ -138,7 +138,7 @@
 %% Redefine \section: sections in cm03 are in Chinese, so 
 %% they are placed in the CJK environment.
   \let\@section\section
-  \newcommand{\@zhsectionstar}[1]{\begin{kai}\@section*{#1}\end{kai}}
+  \newcommand{\@zhsectionstar}[1]{\@section*{\begin{kai}#1\end{kai}}}
   \newcommand{\@zhsection}[2]{\begin{kai}\@section{#1}#2\end{kai}}
   \renewcommand{\section}{\@ifstar{\@zhsectionstar}{\@zhsection}}
 \fi
