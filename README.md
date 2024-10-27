@@ -56,8 +56,8 @@ Times 家族（如 Times New Roman）的 TeXGyre Termes
 
 文件格式繼承自 `article` 但關閉與 CM03 格式不相容的選項（如：`a5paper`, `10pt`, `titlepage`, `twocolumn`）。額外提供以下兩選項：
 
-* `libertine`: 英文字型改用 Libertine 字型（[連結](https://ctan.org/pkg/libertine)）
-* `kaiti`: 中文字型改用「楷體-繁」（作業系統須有此字型且使用 `xetex` 編譯）
+* `libertine`: 英文字型改用 Linux Libertine 字型（[連結](https://ctan.org/pkg/libertine)）
+* `kaiti`: 中文字型改用 macOS 內建的常州華文「楷體-繁」（須用 `xetex` 編譯）
 
 ## 預載套件
 
@@ -90,7 +90,7 @@ Times 家族（如 Times New Roman）的 TeXGyre Termes
 
 因此節（`\section`）假設為中文標題並採用中文數字（一、二、三），由此可產生相對應的 PDF 目錄標題。而子節（`\subsection`）則假設為英文段落，標題後的文字沒有空行隔開，而是間隔一小空白後直接開始，與中文標題一致。然而原始 CM03 說明檔案中的文字並不要求保留，除「三、研究計畫內容（以中文或英文撰寫）：」外，其他節的標題文字可由使用者自行跟改。其他版面設定則繼承自 LaTeX 的 `article` 文件格式。
 
-中文字型選擇配合計畫文件其他頁面採用標楷體。然而標楷體並無設計粗體，加粗僅為軟體模擬，部分留白處太少。而 macOS 上內建的「楷體-繁」字型相近且有設計相對應的粗體，較為美觀清楚。因此針對 macOS 使用者，提供選項 `kaiti` 改採用「楷體-繁」。
+中文字型選擇配合計畫文件其他頁面採用標楷體。然而標楷體並無設計粗體，加粗僅為軟體模擬，部分留白處太少。而 macOS 內建常州華文設計的「楷體-繁」，該字型同為楷體且有設計相對應的粗體字重，較為美觀清楚。因此針對 macOS 使用者，提供選項 `kaiti` 改採用「楷體-繁」。
 
 至於英文字型，國內研究所論文常搭配同是襯線字體的 Times New Roman，依循慣例以 TeX 的同家族字型 TeXGyre Termes 作為預設字型。然而 Times 家族收尾較爲尖銳，相較之下，同是襯線字的 Linux Libertine 收尾處較圓潤與楷體的搭配較為和諧，因此提供選項 `libertine` 可改為 Linux Libertine 字型搭配。
 
