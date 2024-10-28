@@ -1,17 +1,17 @@
-# （非官方）國科會專題計劃中文 CM03 的 LaTeX 文件格式
+# 國科會專題研究計畫申請書表 CM03 研究計畫 LaTeX 文件格式
 
 ## 使用說明
 
 ### 情境
 
-中文專題計劃但是 CM03 內容為英文時適用。
+中文專題計劃 CM03 內容為英文時適用。自然、工程、人文、生科處（理應）皆適用。
 
 ### 要求
 
 1. 文件格式改為 `cm03` 亦即 `\documentclass{cm03}` 即可。
-2. （選用）`XeTeX` 編譯（僅當需要系統字型如*標楷體*、中英文混合、或 Unicode 支援）
+2. （選用）XeTeX 編譯（僅當需要系統字型如*標楷體*、中英文混合、或 Unicode 支援）
 
-用 `LaTeX` 編譯則只限中英文，且中文除節標題外，需在 `\begin{kai}` 與 `\end{kai}` 環境內輸入。
+用 LaTeX 編譯則只限中英文，且中文除節標題外，需在 `\begin{kai}` 與 `\end{kai}` 環境內輸入。
 
 ### 選項
 
@@ -20,7 +20,7 @@
 額外提供以下兩選項改變中英文字型：
 
 * `libertine`: 英文字型改用 Linux Libertine 字型（來自 [libertine](https://ctan.org/pkg/libertine) 套件）
-* `kaiti`: 中文字型改用 macOS 內建的常州華文「楷體-繁」（須用 `xetex` 編譯）
+* `kaiti`: 中文字型改用 macOS 內建的常州華文「楷體-繁」（須用 XeTeX 編譯）
 
 ### 預載套件
 
@@ -36,7 +36,7 @@
 
 若需要對預載套件設定選項， 可在 `\documentclass{cm03}` 之前用指令 `\PassOptionsToPackage{<選項>}{<套件名稱>}` 傳入。
 
-例如，欲更改 `babel` 的語言為英式英文（選項 `british`）並將中英文字型分別改為「楷體-繁」與 Libertine，則檔案開頭改為
+例如，欲更改 `babel` 的語言為英式英文（選項 `british`）並將中英文字型分別設為「楷體-繁」與 Libertine，則檔案開頭改為
 ```latex
 \PassOptionsToPackage{british}{babel}
 \documentclass[libertine,kaiti]{cm03}
@@ -66,8 +66,8 @@
 
 |           | LaTeX | XeTeX |
 |-----------|-------|-------|
-| default   |[proposal.pdf](https://github.com/user-attachments/files/17532662/proposal.pdf)  |  [proposal-xetex.pdf](https://github.com/user-attachments/files/17532661/proposal-xetex.pdf)      |
-| libertine | [proposal-libertine.pdf](https://github.com/user-attachments/files/17532660/proposal-libertine.pdf) |[proposal-libertine-xetex.pdf](https://github.com/user-attachments/files/17532659/proposal-libertine-xetex.pdf)|
+| （無選項）  |[proposal.pdf](https://github.com/user-attachments/files/17532662/proposal.pdf)  |  [proposal-xetex.pdf](https://github.com/user-attachments/files/17532661/proposal-xetex.pdf)      |
+| `libertine` | [proposal-libertine.pdf](https://github.com/user-attachments/files/17532660/proposal-libertine.pdf) |[proposal-libertine-xetex.pdf](https://github.com/user-attachments/files/17532659/proposal-libertine-xetex.pdf)|
 
 ## 設計
 
@@ -104,7 +104,7 @@ Times 家族（如 Times New Roman）的 TeXGyre Termes（來自 [`newtx`](https
 
 至於英文字型，國內研究所論文常搭配同是襯線字體的 Times New Roman，依循慣例以 TeX 的同家族字型 TeXGyre Termes 作為預設字型。然而 Times 家族收尾較爲尖銳細長，較接近中文的明體。相較之下，同是襯線字的 Linux Libertine 較圓潤與楷體的搭配較為和諧，因此提供選項 `libertine` 可改為 Linux Libertine 字型搭配。
 
-至於 `pdfLaTeX` 仍有編譯快速以及 `microtype` 套件支援完整等優點，因此相容盡力 `pdfLaTeX` 不要求使用 `XeTeX` 編譯中文。但中文選擇受限於 TeX 的 T1 字型，標楷體因版權無法製成 T1 字型，改採用開放授權的文鼎楷體替代。
+至於 `pdfLaTeX` 仍有編譯快速以及 `microtype` 套件支援完整等優點，因此盡力相容 `pdfLaTeX` 不要求使用 `XeTeX` 編譯中文。但中文選擇受限於 TeX 的 T1 字型，標楷體因版權無法製成 T1 字型，改採用開放授權的文鼎楷體替代。
 
-[^1]: 根據 Wikipedia 的[說明](https://en.wikipedia.org/wiki/Leading#cite_ref-4)，Word 97–2010 的一倍行距實則為 1.15 倍的行距（leading）之後為 1.08 倍，所以不清楚到底行距實質規定多少。此文件格式行距由 `setspace` 套件的 `\onehalfspacing` 設定。
+[^1]: 根據 Wikipedia 的[說明](https://en.wikipedia.org/wiki/Leading#cite_ref-4)，Word 97–2010 的一倍行距實則為 1.15 倍的行距（leading）之後為 1.08 倍，所以不清楚到底行距實質規定多少。此文件格式行距以 `setspace` 套件的 `\onehalfspacing` 設定行距，印出後肉眼比對約略相等國科會網站下載的範例檔。
 [^2]: 文鼎字型公眾授權字型法律聲明[在此](https://www.arphic.com.tw/2022/01/21/plfont/)。
