@@ -1,4 +1,4 @@
-# 國科會專題研究計畫申請書表 CM03 研究計畫 LaTeX 文件格式
+# 國科會專題研究計畫申請書表：CM03 研究計畫 LaTeX 文件格式
 
 ## 使用說明
 
@@ -6,74 +6,88 @@
 
 中文專題計劃 CM03 內容為英文時適用。自然、工程、人文、生科處（理應）皆適用。
 
-### 要求
+### 使用方式
 
-1. 文件格式改為 `cm03` 亦即 `\documentclass{cm03}` 即可。
-2. （選用）XeTeX 編譯（僅當需要系統字型如*標楷體*、中英文混合、或 Unicode 支援）
+* 文件格式改為 `cm03` 亦即 `\documentclass{cm03}` 即可。
+* 可用 LaTeX 或 XeTeX 編譯
 
-用 LaTeX 編譯則只限中英文，且中文除節標題外，需在 `\begin{kai}` 與 `\end{kai}` 環境內輸入。
+### 文件選項
 
-### 選項
+文件格式繼承自 `article`，排除不相容 CM03 格式的選項後，共有以下可用：
 
-文件格式繼承自 `article` 可用選項 `oneside` 與 `twoside` ；但 CM03 文件不相容的選項（如：`a5paper`, `10pt`, `titlepage`, `twocolumn`）會報錯。
+* `draft`
+* `oneside`
+* `twoside`
+* `fleqn`
+* `leqno`
 
-額外提供以下兩選項改變中英文字型：
+額外提供以下選項改變字型：
 
-* `libertine`: 英文字型改用 Linux Libertine 字型（來自 [libertine](https://ctan.org/pkg/libertine) 套件）
-* `kaiti`: 中文字型改用 macOS 內建的常州華文「楷體-繁」（須用 XeTeX 編譯）
+* `libertine`: 英文字型改用 Linux Libertine（來自 [libertine](https://ctan.org/pkg/libertine) 套件）。
+* `kaiti` （需用 XeTeX 編譯）: 中文字型改用 macOS 內建的常州華文「楷體-繁」。
 
-### 預載套件
+### 文件定義之指令
 
-* 文件格式 `cm03` 內預載以下套件：
-  * 數學相關 `amsmath`, `amsthm`
-  * 排版相關 `babel`, `geometry`, `hyperref`, `setspace`, `lastpage`,
-  * 引用格式 `natbib`
-  * 樣式調整 `enumitem`, `fancyhdr`, `titlesec`, `zhnumber`
-  * 其他 `doi`, `iftex`, `xifthen`
-* 字型相關套件
-  * 用 LaTeX 編譯時額外載入 `CJKutf8`
-  * 用 XeTeX 編譯時額外載入 `fontspec`. `unicode-math`, `xeCJK`
+以下指令可產生 CM03 的章節名稱與說明：
 
-若需要對預載套件設定選項， 可在 `\documentclass{cm03}` 之前用指令 `\PassOptionsToPackage{<選項>}{<套件名稱>}` 傳入。
+* `\ProposalBackground`: 研究計畫之背景
+* `\ProposalMethod`: 研究方法、進行步驟及執行進度
+* `\ProposalPlan`: 預期完成之工作項目及成果
+* `\ProposalIntegration`: 整合型研究計畫說明
 
-例如，欲更改 `babel` 的語言為英式英文（選項 `british`）並將中英文字型分別設為「楷體-繁」與 Libertine，則檔案開頭改為
+若是編輯軟體會根據 `\section` 判斷原始碼格式，支援程式碼摺疊或目錄之類的功能，則建議直接使用 `\section` 指令輸入章節名稱，最後加入 `\vskip1em` 保留足夠的留白。例如：
+
 ```latex
-\PassOptionsToPackage{british}{babel}
-\documentclass[libertine,kaiti]{cm03}
-...
+\section{研究計畫之背景}
+請詳述本研究計畫所要探討或解決的問題、研究原創性、重要性、預期影響性及國內外有關本計畫之研究情況、重要參考文獻之評述等。如為連續性計畫應說明上年度研究進度。
+\vskip1em
 ```
-
-### 範本
-```latex
-\documentclass{cm03}
-\begin{document}
-
-\section{研究計畫之背景}{請詳述本研究計畫所要探討或解決的問題、研究原創性、重要性、預期影響性及國內外有關本計畫之研究情況、重要參考文獻之評述等。如為連續性計畫應說明上年度研究進度。}
-
-\section{研究方法、進行步驟及執行進度}{請分年列述：1.本計畫採用之研究方法與原因及其創新性。2.預計可能遭遇之困難及解決途徑。3.重要儀器之配合使用情形。4.如為須赴國外或大陸地區研究，請詳述其必要性以及預期效益等。}
-
-\section{預期完成之工作項目及成果}{請分年列述：1.預期完成之工作項目。2.對於參與之工作人員，預期可獲之訓練。3.預期完成之研究成果（如實務應用績效、期刊論文、研討會論文、專書、技術報告、專利或技術移轉等質與量之預期成果）。4.學術研究、國家發展及其他應用方面預期之貢獻。}
-
-\section{整合型研究計畫說明}{如為整合型研究計畫請就以上各點分別說明與其他子計畫之相關性。}
-
-\end{document}
-```
-
 
 ### 範例
 
-以 LaTeX 或 XeTeX 配合 [`microtype`](https://ctan.org/pkg/microtype) 套件編譯加上選項 `libertine` 四種結果如下
+```latex
+\documentclass{cm03}
+\usepackage{microtype}
+
+\begin{document}
+
+\ProposalBackground
+\ProposalMethod
+\ProposalPlan
+\ProposalIntegration
+
+\nocite{*}
+
+\bibliographystyle{plain}
+\bibliography{sample}
+\end{document}
+```
+
+以 LaTeX 或 XeTeX 編譯或加上選項 `libertine` 的四種結果如下
 
 |           | LaTeX | XeTeX |
 |-----------|-------|-------|
-| （無選項）  |[proposal.pdf](https://github.com/user-attachments/files/17532662/proposal.pdf)  |  [proposal-xetex.pdf](https://github.com/user-attachments/files/17532661/proposal-xetex.pdf)      |
-| `libertine` | [proposal-libertine.pdf](https://github.com/user-attachments/files/17532660/proposal-libertine.pdf) |[proposal-libertine-xetex.pdf](https://github.com/user-attachments/files/17532659/proposal-libertine-xetex.pdf)|
+| （預設無選項）  |[proposal.pdf](https://github.com/user-attachments/files/17560415/proposal.pdf)  |  [proposal-xetex.pdf](https://github.com/user-attachments/files/17560554/proposal-xetex.pdf)      |
+| `libertine` | [proposal-libertine.pdf](https://github.com/user-attachments/files/17560517/proposal-libertine.pdf) |[proposal-libertine-xetex.pdf](https://github.com/user-attachments/files/17560558/proposal-xetex-libertine.pdf)|
 
 ## 設計
 
 ### 文件格式設定
 
 國科會規定頁面尺寸 A4，一倍行距[^1]，字型大小 12 點，以及頁面邊界 2 公分，其他如字型並無特別規定。
+
+### 預載套件
+
+文件格式預載的套件盡可能精簡，即便常用也留給使用者自行決定。因此只載入設定格式必要的套件：
+
+* 文件格式 `cm03` 內預載以下套件：
+  * 數學相關 `amsmath`, `amsthm`
+  * 排版相關 `geometry`, `setspace`, `lastpage`,
+  * 樣式調整 `fancyhdr`, `titlesec`, `zhnumber`
+  * 其他 `iftex`, `xifthen`
+* 字型相關套件
+  * 用 LaTeX 編譯時額外載入 `CJKutf8`
+  * 用 XeTeX 編譯時額外載入 `fontspec`. `unicode-math`, `xeCJK`
 
 ### 中文字型
 
