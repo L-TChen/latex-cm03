@@ -4,7 +4,9 @@
 
 ### 情境
 
-中文專題計劃 CM03 內容為英文時適用。自然、工程、人文、生科處（理應）皆適用。
+中文專題計劃 CM03 內容為英文時適用，另可改為 CM302 著作目錄。
+
+（理應）符合自然、工程、人文、生科處規定。
 
 ### 使用方式
 
@@ -21,10 +23,12 @@
 * `fleqn`
 * `leqno`
 
-額外提供以下選項改變字型：
+額外提供以下選項：
 
+* `biblio`: 改為 CM302 著作目錄格式（見以下範例說明）。
 * `libertine`: 英文字型改用 Linux Libertine（來自 [libertine](https://ctan.org/pkg/libertine) 套件）。
 * `kaiti` （需用 XeTeX 編譯）: 中文字型改用 macOS 內建的常州華文「楷體-繁」。
+
 
 ### 文件定義之指令
 
@@ -43,7 +47,7 @@
 \vskip1em
 ```
 
-### 範例
+### 表 CM03 範例
 
 ```latex
 \documentclass{cm03}
@@ -69,6 +73,37 @@
 |-----------|-------|-------|
 | （預設無選項）  |[proposal.pdf](https://github.com/user-attachments/files/17560415/proposal.pdf)  |  [proposal-xetex.pdf](https://github.com/user-attachments/files/17560554/proposal-xetex.pdf)      |
 | `libertine` | [proposal-libertine.pdf](https://github.com/user-attachments/files/17560517/proposal-libertine.pdf) |[proposal-libertine-xetex.pdf](https://github.com/user-attachments/files/17560558/proposal-xetex-libertine.pdf)|
+
+
+### 表 CM302 範例
+
+若額外使用選項 `biblio`，則會改為表 CM302 文獻目錄之格式：
+
+1. 文件標題改為「五、著作目錄⋯⋯」
+2. 隱藏 LaTeX 預設之引用章節名稱
+3. 取消 CM03 相關指令 `\ProposalBackground`、`\ProposalMethod`、 `\ProposalPlan`、`\ProposalIntegration` 避免誤用。
+
+
+引用載入之 `.bib` 檔裡所有的論文，只需要用 `\nocite{*}` 即可。例如以下檔案：
+
+```latex
+\documentclass[biblio]{cm03}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{doi}
+
+\usepackage{microtype}
+
+\begin{document}
+
+\nocite{*}
+
+\bibliographystyle{abbrv}
+\bibliography{sample}
+\end{document}
+```
+
+便能產出此[結果](https://github.com/user-attachments/files/17573002/bibliography.pdf)。
 
 ## 設計
 

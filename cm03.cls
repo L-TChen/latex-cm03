@@ -30,6 +30,7 @@
 %% cm03 is not a book
 \DeclareOption{openright}{\cmthree@warning}
 
+\DeclareOption{biblio}{\let\@biblio\relax}
 \DeclareOption{libertine}{\let\@libertine\relax}
 \DeclareOption{kaiti}{\let\@kaiti\relax}
 
@@ -119,7 +120,15 @@
 %% Set up Chinese numbering and the format of section headings
 %% 
 
-\AddToHook{begindocument/end}{\par\everypar={{\setbox0=\lastbox}\everypar{}}\begingroup\large\bfseries 三、研究計畫內容（以中文或英文撰寫）：\endgroup\par}
+\ifx\@biblio\relax
+  \def\cmthree@heading{五、著作目錄（建議呈現與計畫相關之著作目錄，頁數以~2~頁為限）：}
+  \def\cmthree@footer{表\;CM302}
+\else
+  \def\cmthree@heading{三、研究計畫內容（以中文或英文撰寫）：}
+  \def\cmthree@footer{表\;CM03}
+\fi
+
+\AddToHook{begindocument/end}{\par\everypar={{\setbox0=\lastbox}\everypar{}}\begingroup\large\bfseries\cmthree@heading\endgroup\par}
 
 \RequirePackage{zhnumber,titlesec}
 
@@ -133,9 +142,9 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead{}
 \iftutex
-  \lfoot{表\;CM03}
+  \lfoot{\cmthree@footer}
 \else
-  \lfoot{\begin{zh}表\;CM03\end{zh}}
+  \lfoot{\begin{zh}\cmthree@footer\end{zh}}
 \fi
 \cfoot{}
 \iftutex
@@ -147,17 +156,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Set up the section heading for bibliography in Chinese
 
-\AddToHook{begindocument/end}{\renewcommand{\refname}{參考文獻}}
+\ifx\@biblio\relax
+  \AddToHook{begindocument/end}{\renewcommand{\section}[2]{}}
+\else
+  \AddToHook{begindocument/end}{\renewcommand{\refname}{參考文獻}}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define required sections
 
 \newcommand{\zhsection}[2]{\section{#1}#2\vskip1em}
 
-\newcommand{\ProposalBackground}{\zhsection{研究計畫之背景}{請詳述本研究計畫所要探討或解決的問題、研究原創性、重要性、預期影響性及國內外有關本計畫之研究情況、重要參考文獻之評述等。如為連續性計畫應說明上年度研究進度。}}
+\ifx\@biblio\relax
+\else
+  \newcommand{\ProposalBackground}{\zhsection{研究計畫之背景}{請詳述本研究計畫所要探討或解決的問題、研究原創性、重要性、預期影響性及國內外有關本計畫之研究情況、重要參考文獻之評述等。如為連續性計畫應說明上年度研究進度。}}
 
-\newcommand{\ProposalMethod}{\zhsection{研究方法、進行步驟及執行進度}{請分年列述：1. 本計畫採用之研究方法與原因及其創新性。2. 預計可能遭遇之困難及解決途徑。3. 重要儀器之配合使用情形。4. 如為須赴國外或大陸地區研究，請詳述其必要性以及預期效益等。}}
+  \newcommand{\ProposalMethod}{\zhsection{研究方法、進行步驟及執行進度}{請分年列述：1. 本計畫採用之研究方法與原因及其創新性。2. 預計可能遭遇之困難及解決途徑。3. 重要儀器之配合使用情形。4. 如為須赴國外或大陸地區研究，請詳述其必要性以及預期效益等。}}
 
-\newcommand{\ProposalPlan}{\zhsection{預期完成之工作項目及成果}{請分年列述：1. 預期完成之工作項目。2. 對於參與之工作人員，預期可獲之訓練。3. 預期完成之研究成果（如實務應用績效、期刊論文、研討會論文、專書、技術報告、專利或技術移轉等質與量之預期成果）。4. 學術研究、國家發展及其他應用方面預期之貢獻。}}
+  \newcommand{\ProposalPlan}{\zhsection{預期完成之工作項目及成果}{請分年列述：1. 預期完成之工作項目。2. 對於參與之工作人員，預期可獲之訓練。3. 預期完成之研究成果（如實務應用績效、期刊論文、研討會論文、專書、技術報告、專利或技術移轉等質與量之預期成果）。4. 學術研究、國家發展及其他應用方面預期之貢獻。}}
 
-\newcommand{\ProposalIntegration}{\zhsection{整合型研究計畫說明}{如為整合型研究計畫請就以上各點分別說明與其他子計畫之相關性。}}
+  \newcommand{\ProposalIntegration}{\zhsection{整合型研究計畫說明}{如為整合型研究計畫請就以上各點分別說明與其他子計畫之相關性。}}
+\fi
