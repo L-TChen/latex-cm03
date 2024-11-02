@@ -10,7 +10,7 @@
 
 ### 使用方式
 
-* 文件格式改為 `cm03` 亦即 `\documentclass{cm03}` 即可。
+* 文件格式改為 `nstc-cm03` 亦即 `\documentclass{nstc-cm03}` 即可。
 * 可用 LaTeX 或 XeTeX 編譯
 
 ### 文件選項
@@ -50,7 +50,7 @@
 ### 表 CM03 範例
 
 ```latex
-\documentclass{cm03}
+\documentclass{nstc-cm03}
 \usepackage{microtype}
 
 \begin{document}
@@ -77,7 +77,7 @@
 
 ### 表 CM302 範例
 
-若額外使用選項 `biblio`，則會改為表 CM302 文獻目錄之格式：
+若用格式 `nstc-cm302` 則會改為表 CM302 文獻目錄之格式：
 
 1. 文件標題改為「五、著作目錄⋯⋯」
 2. 隱藏 LaTeX 預設之引用章節名稱
@@ -87,7 +87,7 @@
 引用載入之 `.bib` 檔裡所有的論文，只需要用 `\nocite{*}` 即可。例如以下檔案：
 
 ```latex
-\documentclass[biblio]{cm03}
+\documentclass{nstc-cm302}
 
 \usepackage[hidelinks]{hyperref}
 \usepackage{doi}
