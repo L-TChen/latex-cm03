@@ -2,23 +2,25 @@
 %<cm03|cm302>\NeedsTeXFormat{LaTeX2e}[2023-11-01]
 %<cm03>\ProvidesClass{nstc-cm03}
 %<cm302>\ProvidesClass{nstc-cm302}
-%<cm03|cm302>   [2024-11-02 v1.0 NSTC CM03/302 LaTeX classes]
+%<cm03|cm302>   [2024-11-04 v1.0 NSTC CM03/302 LaTeX 文件格式]
 %
 %<*driver>
 \ProvidesFile{\jobname.dtx}
-  [2024/11/02 v1.0 NSTC CM03/302 LaTeX classes]
+  [2024/11/04 v1.0 NSTC CM03/302 LaTeX 文件格式]
 \documentclass{ltxdoc}
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
+\usepackage{url}
 \usepackage{graphicx}
 \usepackage{setspace}
+\usepackage{pdfpages}
 \onehalfspacing
 \usepackage{xltxtra}
-\usepackage{xeCJK}
+\usepackage[CJKspace]{xeCJK}
 \usepackage{zhnumber}
-\setmainfont{Iansui}
-\setCJKmainfont{Iansui}
+\setmainfont{Kaiti TC}
+\setCJKmainfont{bkai00mp.ttf}[AutoFakeBold=2.5]
 \zhnumsetup{style=Traditional}
 \begin{document}
   \DocInput{nstc-cm03.dtx}
@@ -27,19 +29,104 @@
 %</driver>
 % \fi
 %
-% \changes{v1.0}{2024/11/02}{Initial version}
+% \changes{v1.0}{2024/11/04}{初始版本}
 % \GetFileInfo{nstc-cm03.dtx}
-% \title{\textsf{nstc-cm03} 套件\\
-%        \rule{0em}{0.7em}\small\fileinfo}
-% \author{陳亮廷\\ \texttt{ltchen@iis.sinica.edu.tw}}
+% \title{\texorpdfstring{\textsf{nstc-cm03} 套件\thanks{GitHub 專案網站：\url{https://github.com/L-TChen/latex-cm03}} \\
+%        \rule{0em}{0.7em}\small\fileinfo}{nstc-cm03 套件}}
+% \author{陳亮廷 \texorpdfstring{\\ \url{https://l-tchen.github.io}}{}}
 % \date{\zhdate{2024/11/02} \fileversion}
 % \maketitle
-% \section{介紹}
-% 此套件提供國科會中文專題計劃「表 CM03」以及「表 CM302」著作目錄適用的 \LaTeX 文件格式，分別為 |nstc-cm03| 以及 |nstc-cm302|。格式（理應）符合自然、工程、人文、生科處規定。\footnote{唯獨該格式要求設定 Word 的「單行間距」有歧義：但根據 Wikipedia 的說明，Word 97–2010 的單行間距實則為 1.15 倍的行距，之後的版本為 1.08 倍，所以不清楚到底行距實質規定多少。此文件格式行距以 |setspace| 套件設定，肉眼比對約略相等國科會提供的範例。}
+% 此套件針對國科會中文專題計劃表 CM03/CM302 的需求，提供中英混排、符合規定的文件格式 |nstc-cm03| 以及 |nstc-cm302|。\footnote{唯獨該格式要求設定 Word 的「單行間距」有歧義：根據 Wikipedia 的說明，Word 97–2010 的單行間距實則為 1.15 倍的行距，之後的版本為 1.08 倍，所以不清楚到底行距實質規定多少。此文件格式行距以 |setspace| 套件設定，肉眼比對約略相等國科會提供的範例。}
 %
-% \subsection{動機說明}
+% \section{使用方式}
+% 本套件提供設定 CM03/302 版面的文件格式以及中文標題名。
+%
+%
+% \subsection{文件格式} 
+% 提供以下兩種格式繼承修改自 \LaTeX 內建之 |article| 文件格式，更改 |\documentclass| 即可使用。
+%
+% \DescribeMacro{nstc-cm03}
+% 適用於表 CM03 研究計劃的文件格式。
+%
+% \DescribeMacro{nstc-cm302}
+% 適用於表 CM302 著作目錄的文件格式。
+%
+% \subsection{文件格式選項}
+%
+% 兩文件格式皆提供以下選項：
+% 
+% \DescribeMacro{libertine}
+% 更換為 Linux Libertine 字型，較適合搭配楷體漢字。
+% 
+% \DescribeMacro{kaiti}
+% 更換為 macOS 上內建的常州華文「楷體-繁」字型，該字型具備粗體。
+%
+% \DescribeMacro{draft oneside twoside fleqn leqno}
+% 繼承自 |article| 的選項，作用請參考 \LaTeX 中的說明。若使用 |article| 其他不相容於 CM03/302 的選項，仍可編譯但會產生警告訊息。
+%
+% 
+% \subsection{指令} \label{sec:commands}
+% 本套件可使用 |article| 格式的指令。文件格式 CM03 另提供以下指令生成表 CM03 中的章節及敘述說明。
+%
+% \DescribeMacro{\ProposalBackground}
+% 「研究計畫之背景\; 請詳述本研究計畫⋯⋯」
+%
+% \DescribeMacro{\ProposalMethod}
+% 「研究方法、進行步驟及執行進度⋯⋯」
+%
+% \DescribeMacro{\ProposalPlan}
+% 「預期完成之工作項目及成果⋯⋯」
+%
+% \DescribeMacro{\ProposalIntegration}
+% 「整合型研究計畫說明⋯⋯」
+%
+% \subsection{預載套件}
+% 
+% 除 |amsmath| 和 |amsthm| 外，只載入格式設定必要的套件，其他套件請自行載入。
+% \subsection{範例}
+% 以下為原始檔範例，此說明最後附有編譯結果。
+% \subsubsection{CM03 研究計劃}
+% 下列之範本可產生如國科會提供之範例，並具有 PDF 目錄結構：
+%    \begin{macrocode}
+%<*proposal.tex>
+\documentclass[libertine]{nstc-cm03}
+\usepackage{microtype}
+\begin{document}
+
+\ProposalBackground
+\ProposalMethod
+\ProposalPlan
+\ProposalIntegration
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{sample}
+\end{document}
+%</proposal.tex>
+%    \end{macrocode}
+%
+% \subsubsection{CM302 著作目錄}
+% 著作目錄可用指令 |\nocite{*}| 將 |.bib| 檔內所有文獻引用，如：
+%    \begin{macrocode}
+%<*bibliography.tex>
+\documentclass{nstc-cm302}
+\usepackage[hidelinks]{hyperref}
+\usepackage{doi}
+\usepackage{microtype}
+\begin{document}
+
+\nocite{*}
+
+\bibliographystyle{abbrv}
+\bibliography{sample}
+\end{document}
+%</bibliography.tex>
+%    \end{macrocode}
+% 
+% \section{後記}
+% 
 % 理工領域學者學術寫作習慣使用英文，專題研究的申請書則仍常用中文，
-% 因此此文件格式試圖滿足中英文混排並與申請書其他文件一致協調，並有以下要求：
+% 此文件格式試圖滿足中英文混排並與申請書其他文件一致協調，另有以下要求：
 % 
 % \begin{enumerate}
 %   \item 產生之 PDF 檔有相對應的目錄
@@ -53,85 +140,13 @@
 % 
 % 中文字型選擇配合計畫文件其他頁面，將採用標楷體（若作業系統無提供，則用 \TeX 提供的「文鼎 PL 楷體」）。然而標楷體並無設計粗體，加粗僅為軟體模擬，部分留白處太少。而 macOS 內建常州華文設計的「楷體-繁」，該字型同為楷體且有設計相對應的粗體字重，較為美觀清楚。因此針對 macOS 使用者，提供選項 |kaiti| 改採用「楷體-繁」。
 % 
-% 至於英文字型，台灣國內研究所論文常搭配同是襯線字的 Times New Roman，依循慣例以 \TeX 的同家族字型 TeXGyre Termes 作為預設字型。然而 Times 家族收尾較爲尖銳細長，較接近中文的明體。相較之下，同是襯線字的 Linux Libertine 較圓潤與楷體的搭配較為和諧，因此提供選項 |libertine| 可改為 Linux Libertine 字型搭配。
+% 至於英文字型，台灣研究所論文常搭配同是襯線字的 Times New Roman，依循慣例以同字體的 TeXGyre Termes 作為預設字型。然而 Times 字體收尾尖銳細長，較相似中文的明體。相較之下，同是襯線字的 Linux Libertine 較圓潤與楷體較為一直，因此提供選項 |libertine| 可改為 Linux Libertine 字型。
 % 
-% 至於 pdf\LaTeX 仍有編譯快速以及 |microtype| 套件支援完整等優點，因此盡力相容 pdf\LaTeX 不要求使用 \XeTeX 編譯中文。但中文選擇受限於 \TeX 的 T1 字型，標楷體因版權無法製成 T1 字型，改採用公眾授權\footnote{\url{https://www.arphic.com.tw/2022/01/21/plfont/}}的「文鼎 PL 楷體」替代。
-% \section{使用方式}
-% 本套件僅提供設定版面的文件格式以及文件中會出現的標題名稱。
+% 至於 pdf\LaTeX 仍有編譯快速以及 |microtype| 套件支援完整等優點，因此盡力相容 pdf\LaTeX 不要求使用 \XeTeX 編譯中文。但中文選擇受限於 \TeX 的 T1 字型，標楷體因版權無法製成 T1 字型散佈，改採用文鼎公眾授權的「PL 楷體」\footnote{授權聲明在此：\url{https://www.arphic.com.tw/2022/01/21/plfont/}}替代。
+% \paragraph{致謝} 在此特別感謝柯向上博士\footnote{柯博士的個人網頁：\url{https://josh-hs-ko.github.io}}，此套件最初基於他提供的頁面設定所發展。
 %
+% \appendix
 %
-% \subsection{文件格式} 
-% 提供以下兩種格式，更改 |\documentclass|\oarg{選項}\marg{以下格式之一} 即可。
-% 兩者皆提供選項 |kaiti| 與 |libertine| 設定中英文字型。
-%
-% \DescribeMacro{nstc-cm03}
-% 適用於表 CM03 研究計劃的文件格式。
-%
-% \DescribeMacro{nstc-cm302}
-% 適用於表 CM302 著作目錄的文件格式。
-% 
-% \subsection{指令} \label{sec:commands}
-% 本套件提供以下指令生成表 CM03 中的中文章節。
-%
-% \DescribeMacro{\ProposalBackground}
-% 產生「研究計畫之背景」之章節及敘述
-%
-% \DescribeMacro{\ProposalMethod}
-% 產生「研究方法、進行步驟及執行進度」之章節及敘述
-%
-% \DescribeMacro{\ProposalPlan}
-% 產生「預期完成之工作項目及成果」之章節及敘述
-%
-% \DescribeMacro{\ProposalIntegration}
-% 產生「整合型研究計畫說明」之章節及敘述
-%
-% \subsection{預載套件}
-% 
-% 除 |amsmath| 和 |amsthm| 外，只載入設定格式必要的套件，請使用者自行載入。
-% \subsection{範例}
-% \subsubsection{CM03 研究計劃}
-%    \begin{macrocode}
-%<*proposal.tex>
-\documentclass[libertine]{nstc-cm03}
-\usepackage{microtype}
-
-\begin{document}
-
-\ProposalBackground
-% 研究計劃背景
-\ProposalMethod
-% 研究方法
-\ProposalPlan
-% 預計完成的工作項目
-\ProposalIntegration
-% 整合型研究計劃
-
-\nocite{*}
-
-\bibliographystyle{plain}
-\bibliography{sample}
-\end{document}
-%</proposal.tex>
-%    \end{macrocode}
-% \subsubsection{CM302 著作目錄}
-%    \begin{macrocode}
-%<*bibliography.tex>
-\documentclass{nstc-cm302}
-\usepackage[hidelinks]{hyperref}
-\usepackage{doi}
-
-\usepackage{microtype}
-
-\begin{document}
-
-\nocite{*}
-
-\bibliographystyle{abbrv}
-\bibliography{sample}
-\end{document}
-%</bibliography.tex>
-%    \end{macrocode}
-% 
 % \StopEventually{}
 % \section{實作}
 % 此節提供實作細節的說明，供後人修改參考。
@@ -205,7 +220,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{}
-% 若無選項 |kaiti|，則優先選擇系統上的標楷體。然而，標楷體有各種版本，名稱也根據現行編碼習慣略作調整。在中文 Windows 以及 macOS 13.2 以前應皆稱爲「標楷體（|BiauKai|）」，在 macOS 13.3 之後稱為「標楷體-繁（|BiauKaiTC|）」：
+% 若無選項 |kaiti|，則優先選擇系統上的標楷體。然而，標楷體有各種版本，名稱也根據現行編碼習慣略作調整。在中文 Windows 以及 macOS 13.2 以前應皆稱為「標楷體（|BiauKai|）」，在 macOS 13.3 之後稱為「標楷體-繁（|BiauKaiTC|）」：
 %    \begin{macrocode}
 \else
 \IfFontExistsTF{BiauKai}{
@@ -265,19 +280,8 @@
 \fi
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{}
 % \subsection{頁面文字}
-% \begin{macro}{}
-%    \begin{macrocode}
-%<cm302>\def\cmthree@heading{五、著作目錄（建議呈現與計畫相關之著作目錄，頁數以~2~頁為限）：}
-%<cm302>\def\cmthree@footer{表\;CM302}
-%<cm03>\def\cmthree@heading{三、研究計畫內容（以中文或英文撰寫）：}
-%<cm03>\def\cmthree@footer{表\;CM03}
-\AddToHook{begindocument/end}{\par\everypar={{\setbox0=\lastbox}\everypar{}}%
-  \begingroup\large\bfseries\cmthree@heading\endgroup\par}
-
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}{}
 % 設定中英文章節格式：
 %    \begin{macrocode}
 %<cm03>\RequirePackage{zhnumber,titlesec}
@@ -287,6 +291,20 @@
 %<cm03>  {\bfseries\normalsize}{\thesubsection}{0.5em}{}
 %<cm03>\titleformat{\subsubsection}[runin]%
 %<cm03>  {\bfseries\normalsize}{\thesubsubsection}{0.5em}{}
+%
+%    \end{macrocode}
+% \end{macro}
+% 設定表 CM03/CM302 首頁標題：
+% \begin{macro}{}
+%    \begin{macrocode}
+%<cm302>\def\cmthree@heading{五、著作目錄（建議呈現與計畫相關之著作目錄，頁數以~2~頁為限）：}
+%<cm302>\def\cmthree@footer{表\;CM302}
+%<cm03>\def\cmthree@heading{三、研究計畫內容（以中文或英文撰寫）：}
+%<cm03>\def\cmthree@footer{表\;CM03}
+\AddToHook{begindocument/end}{\par%
+  \everypar={{\setbox0=\lastbox}\everypar{}}%
+  \begingroup\large\bfseries\cmthree@heading\endgroup\par}
+
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{}
@@ -303,9 +321,11 @@
 \fi
 \cfoot{}
 \iftutex
-  \rfoot{共~\pageref{LastPage}~頁\hspace{1em}第~\thepage~頁}
+  \rfoot{共~\pageref{LastPage}~頁%
+  \hspace{1em}第~\thepage~頁}
 \else
-  \rfoot{\begin{zh}共~\pageref{LastPage}~頁\hspace{1em}第~\thepage~頁\end{zh}}
+  \rfoot{\begin{zh}共~\pageref{LastPage}~頁%
+  \hspace{1em}第~\thepage~頁\end{zh}}
 \fi
 %    \end{macrocode}
 % \end{macro}
@@ -323,6 +343,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\ProposalBackground, \ProposalMethod, \ProposalPlan, \ProposalIntegration}
+% 設定表 CM03 各節標題文字與說明：
 %    \begin{macrocode}
 %<cm03>\newcommand{\ProposalBackground}{\zhsection{研究計畫之背景}{請詳述本研究計畫所要探討或解決的問題、研究原創性、重要性、預期影響性及國內外有關本計畫之研究情況、重要參考文獻之評述等。如為連續性計畫應說明上年度研究進度。}}
 %<cm03>\newcommand{\ProposalMethod}{\zhsection{研究方法、進行步驟及執行進度}{請分年列述：1. 本計畫採用之研究方法與原因及其創新性。2. 預計可能遭遇之困難及解決途徑。3. 重要儀器之配合使用情形。4. 如為須赴國外或大陸地區研究，請詳述其必要性以及預期效益等。}}
@@ -332,5 +353,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+% \includepdfmerge[nup=1x2, landscape]{./example/proposal.pdf, ./example/bibliography.pdf}
+%
 % \Finale
 
