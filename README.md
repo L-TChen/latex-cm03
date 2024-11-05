@@ -1,34 +1,104 @@
-# 國科會專題研究計畫申請書表：CM03 研究計畫 LaTeX 文件格式
+# nstc-proposal: LaTeX classes for NSTC grant proposals (國科會專題研究計畫 LaTeX 文件格式)
 
-## 使用說明
+(See [below](#概要) for 中文解說)
 
-### 情境
+## Overview
 
-中文專題計劃 CM03 內容為英文時適用，另可改為 CM302 著作目錄。
+This package consists of LaTeX classes for preparing grant proposals to National Science and Technology Council, Taiwan, that is:
 
-（理應）符合自然、工程、人文、生科處規定。
+* CM03
+* CM302
 
-### 使用方式
+which support typesetting in both Chinese and English and are compatible with pdfLaTeX and XeTeX.
 
-* 文件格式改為 `nstc-cm03` 亦即 `\documentclass{nstc-cm03}` 即可。
-* 可用 LaTeX 或 XeTeX 編譯
+## Installation
+
+### CTAN installation
+
+Run the following command in a terminal (or use any TeX package manager) to install:
+
+```bash
+tlmger install nstc-proposal
+```
+
+### Manual Installation
+
+1. Run the following command in a terminal to build files and examples:
+
+   ```bash
+   latex nstc-proposal.ins
+   ```
+
+2. Copy the generated `.cls` files to a directory searchable by LaTeX.
+   Hint. Run the following command to locate the local texmf directory:
+
+   ```bash
+   kpsewhich -var-value TEXMFLOCAL
+   ```
+
+   Placing the generated files under any subdirectory of the directory shown above should work.
+
+3. Compile tex files under `example` by pdfLaTeX or XeTeX and see if the package has been installed properly.
+
+## Usage
+
+See `nstc-proposal.pdf`.
+
+## Development
+
+`nstc-proposal` was written and is maintained by [Liang-Ting Chen](https://l-tchen.github.io).
+
+Please report any bug or feature request on GitHub (<https://github.com/L-TChen/nstc-proposal>).
+
+## License
+
+The `nstc-proposal` class is distributed under the conditions of the LATEX Project Public License, either version 1.3c of this license or (at your option) any later version.
+
+## 概要
+
+此套件提供準以下台灣國科會專題計劃申請書的文件格式：
+
+* 表 CM03
+* 表 CM302
+
+並且支援中英混排，相容 pdfLaTeX 跟 XeTeX 編譯。
+
+## 安裝方式
+
+### CTAN 安裝
+
+在終端機下執行以下命令安裝（或是用任何一個 TeX 的套件管理程式）:
+
+```bash
+tlmger install nstc-proposal
+```
+
+### 手動安裝
+
+1. 在終端機下執行以下命令生成檔案跟範例：
+
+   ```bash
+   latex nstc-proposal.ins
+   ```
+
+2. 把生成出來的 `.cls` 檔案複製到 LaTeX 可以搜尋得到的目錄下。提示：把檔案放在 `kpsewhich -var-value TEXMFLOCAL` 下的任一子目錄應該就可以。`TEXMFLOCAL` 路徑可用以下指令得到：
+
+   ```bash
+   kpsewhich -var-value TEXMFLOCAL
+   ```
+
+3. 用 pdfLaTeX 或是 XeTeX 編譯 `example` 目錄底下的檔案，看是否有安裝成功。
+
+## 使用方式
+
+請參考 `nstc-proposal.pdf`。
 
 ### 文件選項
 
-文件格式繼承自 `article`，排除不相容 CM03 格式的選項後，共有以下可用：
+文件格式繼承自 `article` 額外提供以下選項：
 
-* `draft`
-* `oneside`
-* `twoside`
-* `fleqn`
-* `leqno`
-
-額外提供以下選項：
-
-* `biblio`: 改為 CM302 著作目錄格式（見以下範例說明）。
 * `libertine`: 英文字型改用 Linux Libertine（來自 [libertine](https://ctan.org/pkg/libertine) 套件）。
 * `kaiti` （需用 XeTeX 編譯）: 中文字型改用 macOS 內建的常州華文「楷體-繁」。
-
 
 ### 文件定義之指令
 
@@ -74,7 +144,6 @@
 | （預設無選項）  |[proposal.pdf](https://github.com/user-attachments/files/17560415/proposal.pdf)  |  [proposal-xetex.pdf](https://github.com/user-attachments/files/17560554/proposal-xetex.pdf)      |
 | `libertine` | [proposal-libertine.pdf](https://github.com/user-attachments/files/17560517/proposal-libertine.pdf) |[proposal-libertine-xetex.pdf](https://github.com/user-attachments/files/17560558/proposal-xetex-libertine.pdf)|
 
-
 ### 表 CM302 範例
 
 若用格式 `nstc-cm302` 則會改為表 CM302 文獻目錄之格式：
@@ -82,7 +151,6 @@
 1. 文件標題改為「五、著作目錄⋯⋯」
 2. 隱藏 LaTeX 預設之引用章節名稱
 3. 取消 CM03 相關指令 `\ProposalBackground`、`\ProposalMethod`、 `\ProposalPlan`、`\ProposalIntegration` 避免誤用。
-
 
 引用載入之 `.bib` 檔裡所有的論文，只需要用 `\nocite{*}` 即可。例如以下檔案：
 
@@ -113,13 +181,8 @@
 
 ### 預載套件
 
-文件格式預載的套件盡可能精簡，即便常用也留給使用者自行決定。因此只載入設定格式必要的套件：
+文件格式除設定格式必要的套件外，另載入 `amsmath` 以及 `amsthm` 兩套件以及：
 
-* 文件格式 `cm03` 內預載以下套件：
-  * 數學相關 `amsmath`, `amsthm`
-  * 排版相關 `geometry`, `setspace`, `lastpage`,
-  * 樣式調整 `fancyhdr`, `titlesec`, `zhnumber`
-  * 其他 `iftex`, `xifthen`
 * 字型相關套件
   * 用 LaTeX 編譯時額外載入 `CJKutf8`
   * 用 XeTeX 編譯時額外載入 `fontspec`. `unicode-math`, `xeCJK`
@@ -138,22 +201,15 @@
 
 Times 家族（如 Times New Roman）的 TeXGyre Termes（來自 [`newtx`](https://ctan.org/pkg/newtx) 套件）
 
-### 後記
+## 開發維護
 
-理工領域學者學術寫作習慣使用英文，但專題研究的申請書則仍是中文順眼，且 CM03 文件的節的標題為中文，此文件格式試圖在兩者間取得平衡。另外有以下幾個原則要求：
+本套件 `nstc-proposal` 是由[陳亮廷](<https://l-tchen.github.io>)所撰寫維護。
 
-1. 產生之 PDF 檔有相對應的目錄
-2. 中英文排版包括字型且與申請書其他頁面一致和諧
-3. 需相容 pdfLaTeX
-4. 字型使用需合法
+發現任何錯誤或是有任何需求，請回報到 GitHub 上的專案網站 <https://github.com/L-TChen/nstc-proposal。>
 
-因此節（`\section`）假設為中文標題並採用中文數字（一、二、三），由此可產生相對應的 PDF 目錄標題。而子節（`\subsection`）則假設為英文段落，標題後的文字沒有空行隔開，而是間隔一小空白後直接開始，與中文標題一致。然而原始 CM03 說明檔案中的文字並不要求保留，除「三、研究計畫內容（以中文或英文撰寫）：」外，其他節的標題文字可由使用者自行跟改。其他版面設定則繼承自 LaTeX 的 `article` 文件格式。
+## 版權聲明
 
-中文字型選擇配合計畫文件其他頁面採用標楷體。然而標楷體並無設計粗體，加粗僅為軟體模擬，部分留白處太少。而 macOS 內建常州華文設計的「楷體-繁」，該字型同為楷體且有設計相對應的粗體字重，較為美觀清楚。因此針對 macOS 使用者，提供選項 `kaiti` 改採用「楷體-繁」。
-
-至於英文字型，國內研究所論文常搭配同是襯線字體的 Times New Roman，依循慣例以 TeX 的同家族字型 TeXGyre Termes 作為預設字型。然而 Times 家族收尾較爲尖銳細長，較接近中文的明體。相較之下，同是襯線字的 Linux Libertine 較圓潤與楷體的搭配較為和諧，因此提供選項 `libertine` 可改為 Linux Libertine 字型搭配。
-
-至於 `pdfLaTeX` 仍有編譯快速以及 `microtype` 套件支援完整等優點，因此盡力相容 `pdfLaTeX` 不要求使用 `XeTeX` 編譯中文。但中文選擇受限於 TeX 的 T1 字型，標楷體因版權無法製成 T1 字型，改採用開放授權的文鼎楷體替代。
+The `nstc-proposal` class is distributed under the conditions of the LATEX Project Public License, either version 1.3c of this license or (at your option) any later version.
 
 [^1]: 根據 Wikipedia 的[說明](https://en.wikipedia.org/wiki/Leading#cite_ref-4)，Word 97–2010 的一倍行距實則為 1.15 倍的行距（leading）之後為 1.08 倍，所以不清楚到底行距實質規定多少。此文件格式行距以 `setspace` 套件的 `\onehalfspacing` 設定行距，印出後肉眼比對約略相等國科會網站下載的範例檔。
 [^2]: 文鼎字型公眾授權字型法律聲明[在此](https://www.arphic.com.tw/2022/01/21/plfont/)。

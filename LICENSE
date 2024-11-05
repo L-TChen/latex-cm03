@@ -10,6 +10,6 @@ This work has the LPPL maintenance status `maintained'.
 
 The Current Maintainer of this work is Liang-Ting Chen (陳亮廷)
 
-This work consists of the files nstc-cm03.dtx and nstc-cm03.ins
+This work consists of the files nstc-proposal.dtx and nstc-proposal.ins
 and the derived files nstc-cm03.cls, nstc-cm302.cls,
 example/proposal.tex, and example/bibliography.tex.

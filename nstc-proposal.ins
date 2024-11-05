@@ -1,4 +1,4 @@
-%% nstc-cm03.ins
+%% nstc-proposal.ins
 %% Copyright 2024 Liang-Ting
 % 
 % This work may be distributed and/or modified under the
@@ -13,14 +13,14 @@
 % 
 % The Current Maintainer of this work is Liang-Ting Chen (陳亮廷)
 % 
-% This work consists of the files nstc-cm03.dtx and nstc-cm03.ins
+% This work consists of the files nstc-proposal.dtx and nstc-proposal.ins
 % and the derived files nstc-cm03.cls, nstc-cm302.cls,
 % example/proposal.tex, and example/bibliography.tex.
 
 \input docstrip.tex
 \askforoverwritefalse
 \keepsilent
-\usedir{tex/latex/nstc-cm03}
+\usedir{tex/latex/nstc-proposal}
 \preamble
 
 This work may be distributed and/or modified under the
@@ -35,15 +35,15 @@ This work has the LPPL maintenance status `maintained'.
 
 The Current Maintainer of this work is Liang-Ting Chen (陳亮廷).
 
-This work consists of the files nstc-cm03.dtx and nstc-cm03.ins
+This work consists of the files nstc-proposal.dtx and nstc-proposal.ins
 and the derived files nstc-cm03.cls, nstc-cm302.cls,
 example/proposal.tex, and example/bibliography.tex.
 
 \endpreamble
-\generate{\file{example/proposal.tex}{\from{nstc-cm03.dtx}{proposal.tex}}
-          \file{example/bibliography.tex}{\from{nstc-cm03.dtx}{bibliography.tex}}
-          \file{nstc-cm03.cls}{\from{nstc-cm03.dtx}{cm03}}
-          \file{nstc-cm302.cls}{\from{nstc-cm03.dtx}{cm302}}
+\generate{\file{example/proposal.tex}{\from{\jobname.dtx}{proposal.tex}}
+          \file{example/bibliography.tex}{\from{\jobname.dtx}{bibliography.tex}}
+          \file{nstc-cm03.cls}{\from{\jobname.dtx}{cm03}}
+          \file{nstc-cm302.cls}{\from{\jobname.dtx}{cm302}}
           }
 \obeyspaces
 \endbatchfile

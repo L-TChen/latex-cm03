@@ -18,26 +18,28 @@
 \onehalfspacing
 \usepackage{xltxtra}
 \usepackage[CJKspace]{xeCJK}
-\usepackage{zhnumber}
-\setmainfont{Kaiti TC}
+\usepackage{titlesec,zhnumber}
+\renewcommand\labelenumi{(\zhnum{enumi})}
+\renewcommand\theenumi\labelenumi
+\setmainfont{bkai00mp.ttf}[AutoFakeBold=2.5]
 \setCJKmainfont{bkai00mp.ttf}[AutoFakeBold=2.5]
 \zhnumsetup{style=Traditional}
 \begin{document}
-  \DocInput{nstc-cm03.dtx}
+  \DocInput{\jobname.dtx}
 %%  \PrintChanges
 \end{document}
 %</driver>
 % \fi
 %
-% \changes{v1.0}{2024/11/04}{初始版本}
-% \GetFileInfo{nstc-cm03.dtx}
-% \title{\texorpdfstring{\textsf{nstc-cm03} 套件\thanks{GitHub 專案網站：\url{https://github.com/L-TChen/latex-cm03}} \\
-%        \rule{0em}{0.7em}\small\fileinfo}{nstc-cm03 套件}}
-% \author{陳亮廷 \texorpdfstring{\\ \url{https://l-tchen.github.io}}{}}
-% \date{\zhdate{2024/11/02} \fileversion}
+% \changes{v1.0}{2024/11/05}{初始版本}
+% \GetFileInfo{\jobname.dtx}
+% \title{\texorpdfstring{\textsf{nstc-proposal} 套件\thanks{GitHub 專案網站：\url{https://github.com/L-TChen/latex-cm03}}}}
+% \author{陳亮廷}
+% \date{\zhdate{2024/11/05} \fileversion}
 % \maketitle
 % 此套件針對國科會中文專題計劃表 CM03/CM302 的需求，提供中英混排、符合規定的文件格式 |nstc-cm03| 以及 |nstc-cm302|。\footnote{唯獨該格式要求設定 Word 的「單行間距」有歧義：根據 Wikipedia 的說明，Word 97–2010 的單行間距實則為 1.15 倍的行距，之後的版本為 1.08 倍，所以不清楚到底行距實質規定多少。此文件格式行距以 |setspace| 套件設定，肉眼比對約略相等國科會提供的範例。}
 %
+% \titleformat{\section}{\bfseries\Large}{\zhnum{section}、}{0em}{}
 % \section{使用方式}
 % 本套件提供設定 CM03/302 版面的文件格式以及中文標題名。
 %
@@ -66,19 +68,19 @@
 %
 % 
 % \subsection{指令} \label{sec:commands}
-% 本套件可使用 |article| 格式的指令。文件格式 CM03 另提供以下指令生成表 CM03 中的章節及敘述說明。
+% 本套件可使用 |article| 格式的指令。此套件另提供以下指令生成表 CM03 中的章節及敘述說明。
 %
 % \DescribeMacro{\ProposalBackground}
-% 「研究計畫之背景\; 請詳述本研究計畫⋯⋯」
+% 「研究計畫之背景\quad 請詳述本研究計畫\dots\dots」
 %
 % \DescribeMacro{\ProposalMethod}
-% 「研究方法、進行步驟及執行進度⋯⋯」
+% 「研究方法、進行步驟及執行進度\quad 請分年列述：\dots\dots」
 %
 % \DescribeMacro{\ProposalPlan}
-% 「預期完成之工作項目及成果⋯⋯」
+% 「預期完成之工作項目及成果\quad 請分年列述：\dots\dots」
 %
 % \DescribeMacro{\ProposalIntegration}
-% 「整合型研究計畫說明⋯⋯」
+% 「整合型研究計畫說明\quad 如為整合型研究計畫\dots\dots」
 %
 % \subsection{預載套件}
 % 
@@ -98,7 +100,6 @@
 \ProposalPlan
 \ProposalIntegration
 
-\nocite{*}
 \bibliographystyle{plain}
 \bibliography{sample}
 \end{document}
@@ -148,7 +149,10 @@
 % \appendix
 %
 % \StopEventually{}
+%
+% \titleformat{\section}{\bfseries\Large}{附錄\Alph{section}、}{0em}{}
 % \section{實作}
+%
 % 此節提供實作細節的說明，供後人修改參考。
 % 
 % \subsection{文件格式選項}
@@ -269,7 +273,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{}
-% 使用 |newtxtext| 設定英文字型為 Times 家族的 \textsf{TeXGyre Termes}。然而，|newtxtext| 會改變 |fontspec| 的設定，以至於使用者無法再改字型，使用者仍可能載入其他設定，所以用 |\defaultfontfeatures{}| 恢復設定：
+% 使用 |newtxtext| 設定英文字型為 \textsf{TeXGyre Termes}。然而，|newtxtext| 會改變 |fontspec| 設定，以至於使用者無法再改字型，而使用者仍可能載入其他設定，所以用 |\defaultfontfeatures{}| 恢復設定：
 %    \begin{macrocode}
 \else
   \RequirePackage{newtxtext}
